@@ -137,7 +137,7 @@ def get_integration_json(request: Request):
                 "app_url": "https://project-it.onrender.com",
                 "background_color": "#ffffff"
             },
-            "integration_category": "Analytics & Monitoring",
+            "integration_category": "Monitoring & Logging",
             "integration_type": "interval",
             "is_active": True,
             "key_features": [
