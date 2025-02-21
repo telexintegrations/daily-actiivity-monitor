@@ -148,7 +148,7 @@ https://portfolio-wahz.onrender.com: 2 active users
    - Enable the integration in your organization.
 
 ## Screenshots
-![Example Telex Report](example.png) *(Replace with actual screenshot)*
+![Example Telex Report](example.png)
 
 
 ## License
