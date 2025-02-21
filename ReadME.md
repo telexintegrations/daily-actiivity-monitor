@@ -89,11 +89,49 @@ export const trackPageView = async () => {
 ### Integration JSON
 ```json
 {
-    "type": "interval",
-    "name": "Daily Active Users Bot",
-    "interval": "15m",
-    "endpoint": "https://portfolio-wahz.onrender.com/api/analytics/daily",
-    "format": "Daily Active Users Report: {{unique_visitors}} users"
+        "data": {
+            "author": "Blackfox",
+            "date": {
+                "created_at": "2025-02-13",
+                "updated_at": "2025-02-13"
+            },
+            "descriptions": {
+                "app_description": "A bot that monitors the number of daily active users (DAU) on a platform.",
+                "app_logo": "https://img.icons8.com/?size=100&id=37410&format=png&color=000000",
+                "app_name": "Telex DAU Monitor",
+                "app_url": "https://project-it.onrender.com",
+                "background_color": "#ffffff"
+            },
+            "integration_category": "Monitoring & Logging",
+            "integration_type": "interval",
+            "is_active": True,
+            "key_features": [
+                "Receive messages from Telex channels.",
+                "Fetch daily active users (DAU) from website analytics.",
+                "Format messages based on predefined templates or logic.",
+                "Send DAU reports back to the Telex channel.",
+                "Log DAU tracking activity for auditing purposes."
+            ],
+            "permissions": {
+                "events": [
+                    "Receive messages from Telex channels.",
+                    "Fetch DAU metrics from website analytics API.",
+                    "Format DAU reports.",
+                    "Send DAU updates back to the channel.",
+                    "Log DAU tracking activity for auditing purposes."
+                ]
+            },
+            "settings": [
+                {"label": "site-1", "type": "text", "required": True, "default": ""},
+                {
+                    "label": "interval",
+                    "type": "text",
+                    "required": True,
+                    "default": "@hourly"
+                }
+            ],
+            "tick_url": f"{base_url}/tick"
+        }
 }
 ```
 ### Example Message Sent to Telex Channel
@@ -110,13 +148,8 @@ https://portfolio-wahz.onrender.com: 2 active users
    - Enable the integration in your organization.
 
 ## Screenshots
-![Example Telex Report](https://example.com/screenshot.png) *(Replace with actual screenshot)*
+![Example Telex Report](example.png) *(Replace with actual screenshot)*
 
-## Contributing
-1. Fork the repository.
-2. Create a new branch.
-3. Make your changes and commit using [Conventional Commits](https://www.conventionalcommits.org/).
-4. Open a Pull Request.
 
 ## License
 This project is licensed under the MIT License.
