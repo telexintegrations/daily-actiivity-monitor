@@ -104,7 +104,7 @@ export const trackPageView = async () => {
             },
             "integration_category": "Monitoring & Logging",
             "integration_type": "interval",
-            "is_active": True,
+            "is_active": true,
             "key_features": [
                 "Receive messages from Telex channels.",
                 "Fetch daily active users (DAU) from website analytics.",
@@ -122,15 +122,15 @@ export const trackPageView = async () => {
                 ]
             },
             "settings": [
-                {"label": "site-1", "type": "text", "required": True, "default": ""},
+                {"label": "site-1", "type": "text", "required": true, "default": ""},
                 {
                     "label": "interval",
                     "type": "text",
-                    "required": True,
+                    "required": true,
                     "default": "@hourly"
                 }
             ],
-            "tick_url": f"{base_url}/tick"
+            "tick_url": "{base_url}/tick"
         }
 }
 ```
