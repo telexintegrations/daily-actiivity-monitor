@@ -1,0 +1,1 @@
+## Monitors the number of daily active users on a platform.

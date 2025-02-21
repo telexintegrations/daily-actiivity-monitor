@@ -1,0 +1,61 @@
+2025-02-20 09:10:51,905 - dau_monitor - INFO - Received tick request for channel: 0195204d-4679-75ff-8d14-3fbed758cb3d
+2025-02-20 09:10:51,905 - dau_monitor - DEBUG - Full payload: MonitorPayload(channel_id=0195204d-4679-75ff-8d14-3fbed758cb3d, return_url=https://ping.telex.im/v1/return/0195204d-4679-75ff-8d14-3fbed758cb3d, settings_count=2)
+2025-02-20 09:10:51,905 - dau_monitor - DEBUG - Added monitoring task to background tasks
+2025-02-20 09:10:51,912 - dau_monitor - INFO - POST /tick completed in 0.02s - Status: 202
+2025-02-20 09:10:51,915 - dau_monitor - INFO - Starting monitoring task for payload: MonitorPayload(channel_id=0195204d-4679-75ff-8d14-3fbed758cb3d, return_url=https://ping.telex.im/v1/return/0195204d-4679-75ff-8d14-3fbed758cb3d, settings_count=2)
+2025-02-20 09:10:51,917 - dau_monitor - DEBUG - Sites to monitor: ['https://portfolio-wahz.onrender.com']
+2025-02-20 09:10:51,922 - dau_monitor - DEBUG - Initiating parallel DAU data fetch
+2025-02-20 09:10:51,922 - dau_monitor - DEBUG - Attempting to fetch DAU data from site: https://portfolio-wahz.onrender.com
+2025-02-20 09:10:54,567 - dau_monitor - DEBUG - Making GET request to https://portfolio-wahz.onrender.com/api/analytics/daily
+2025-02-20 09:10:54,568 - httpcore.connection - DEBUG - connect_tcp.started host='portfolio-wahz.onrender.com' port=443 local_address=None timeout=10 socket_options=None
+2025-02-20 09:10:55,008 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000001FAE362D5B0>
+2025-02-20 09:10:55,016 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x000001FAE3615550> server_hostname='portfolio-wahz.onrender.com' timeout=10
+2025-02-20 09:10:55,278 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000001FAE3238620>
+2025-02-20 09:10:55,279 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-02-20 09:10:55,280 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-20 09:10:55,281 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-02-20 09:10:55,281 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-20 09:10:55,283 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-02-20 09:10:55,617 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 20 Feb 2025 08:10:55 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'CF-Ray', b'914d05e1681f8b70-LHR'), (b'CF-Cache-Status', b'DYNAMIC'), (b'Vary', b'Accept-Encoding'), (b'rndr-id', b'9f167342-1a7e-4003'), (b'x-render-origin-server', b'uvicorn'), (b'Server', b'cloudflare'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-02-20 09:10:55,626 - httpx - INFO - HTTP Request: GET https://portfolio-wahz.onrender.com/api/analytics/daily "HTTP/1.1 200 OK"
+2025-02-20 09:10:55,630 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-02-20 09:10:55,635 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-20 09:10:55,637 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-20 09:10:55,640 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-20 09:10:55,643 - dau_monitor - DEBUG - Request completed in 1.07 seconds
+2025-02-20 09:10:55,644 - dau_monitor - INFO - Successfully fetched DAU data from https://portfolio-wahz.onrender.com: {'date': '2025-02-20', 'unique_visitors': 1}
+2025-02-20 09:10:55,648 - httpcore.connection - DEBUG - close.started
+2025-02-20 09:10:55,651 - httpcore.connection - DEBUG - close.complete
+2025-02-20 09:10:55,654 - dau_monitor - DEBUG - Fetch results: [
+  {
+    "site": "https://portfolio-wahz.onrender.com",
+    "dau": 1
+  }
+]
+2025-02-20 09:10:55,660 - dau_monitor - DEBUG - Formatted message: https://portfolio-wahz.onrender.com: 1 active users
+2025-02-20 09:10:55,660 - dau_monitor - DEBUG - Prepared response data: {
+  "message": "https://portfolio-wahz.onrender.com: 1 active users",
+  "username": "DAU Monitor",
+  "event_name": "Daily Active Users Report",
+  "status": "success"
+}
+2025-02-20 09:10:55,670 - dau_monitor - DEBUG - Sending response to https://ping.telex.im/v1/return/0195204d-4679-75ff-8d14-3fbed758cb3d
+2025-02-20 09:10:56,940 - httpcore.connection - DEBUG - connect_tcp.started host='ping.telex.im' port=443 local_address=None timeout=5.0 socket_options=None
+2025-02-20 09:10:57,523 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000001FAE306F830>
+2025-02-20 09:10:57,525 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x000001FAE3616850> server_hostname='ping.telex.im' timeout=5.0
+2025-02-20 09:10:57,733 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000001FAE325F170>
+2025-02-20 09:10:57,745 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-20 09:10:57,749 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-20 09:10:57,753 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-20 09:10:57,754 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-20 09:10:57,758 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-20 09:10:58,049 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 202, b'Accepted', [(b'Server', b'nginx/1.26.2'), (b'Date', b'Thu, 20 Feb 2025 08:10:58 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'116'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Allow-Headers', b'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Range')])
+2025-02-20 09:10:58,054 - httpx - INFO - HTTP Request: POST https://ping.telex.im/v1/return/0195204d-4679-75ff-8d14-3fbed758cb3d "HTTP/1.1 202 Accepted"
+2025-02-20 09:10:58,056 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-20 09:10:58,058 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-20 09:10:58,060 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-20 09:10:58,060 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-20 09:10:58,061 - dau_monitor - INFO - Response sent. Status: 202
+2025-02-20 09:10:58,061 - dau_monitor - ERROR - Failed to send response. Status: 202, Body: {"status":"success","status_code":202,"message":"request received","task_id":"34d277f9-7c56-46c7-814f-36293c8e6e07"}
+2025-02-20 09:10:58,062 - httpcore.connection - DEBUG - close.started
+2025-02-20 09:10:58,063 - httpcore.connection - DEBUG - close.complete

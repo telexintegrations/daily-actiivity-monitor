@@ -1,0 +1,50 @@
+{
+	"data": {
+		"author": "Blackfox",
+		"date": {
+			"created_at": "2025-02-13",
+			"updated_at": "2025-02-13"
+		},
+		"descriptions": {
+			"app_description": "A bot that Monitors the number of daily active users on a platform.",
+			"app_logo": "https://img.icons8.com/?size=100&id=37410&format=png&color=000000",
+			"app_name": "Telex DAU Monitor",
+			"app_url": "",
+			"background_color": "#ffffff"
+		},
+		"integration_category": "CRM & Customer Support",
+		"integration_type": "output",
+		"is_active": true,
+		"key_features": [
+            "Receive messages from Telex channels.",
+            "Parse and process DAU metrics from received messages.",
+            "Format messages based on predefined templates or logic.",
+            "Send formatted DAU updates back to the channel.",
+            "Log message formatting and DAU tracking activity for auditing purposes."
+        ],
+        "permissions": {
+            "events": [
+                "Receive messages from Telex channels.",
+                "Parse and process DAU metrics.",
+                "Format messages based on predefined templates or logic.",
+                "Send formatted DAU updates back to the channel.",
+                "Log DAU tracking activity for auditing purposes."
+            ]
+		},
+		"settings": [
+			{
+				"label": "site-1",
+				"default": "https://portfolio-wahz.onrender.com",
+				"type": "text",
+				"required": true
+			},
+			{
+				"label": "interval",
+				"type": "text",
+				"required": true,
+				"default": "* * * * *"
+			}
+		],
+		"tick_url": f"{base_url}/tick"
+	}
+}
