@@ -29,8 +29,8 @@ Ensure you have the following installed:
 ### Setup
 #### Clone the Repository
 ```sh
-  git clone https://github.com/your-repo/telex-daily-active-users-bot.git
-  cd telex-daily-active-users-bot
+  git clone https://github.com/telexintegrations/daily-actiivity-monitor.git
+  cd daily-actiivity-monitor
 ```
 #### Install Dependencies
 ```sh
