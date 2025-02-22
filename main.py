@@ -165,6 +165,7 @@ def get_integration_json(request: Request):
                     "default": "@hourly"
                 }
             ],
+            "target_url": "https://portfolio-wahz.onrender.com",
             "tick_url": f"{base_url}/tick"
         }
     }
