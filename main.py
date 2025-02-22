@@ -80,6 +80,7 @@ async def monitor_dau_task(payload: MonitorPayload):
     
     # Extract and log sites to monitor
     sites = [s.default for s in payload.settings if s.label.startswith("site")]
+    frontend_sites = [s.default if s.label.startswith("frontend") else "No frontend" for s in payload.settings]
     logger.debug(f"Sites to monitor: {sites}")
     
     # Fetch data from all sites
@@ -89,7 +90,7 @@ async def monitor_dau_task(payload: MonitorPayload):
     
     # Format message
     message_lines = [
-        f"{result['site']}: {result['dau']} active users"
+        f"{result['site']}: {result['dau']} active users for the frontend site {frontend_sites[0]}"
         if "dau" in result
         else f"{result['site']}: {result['error']}"
         for result in results
@@ -158,6 +159,7 @@ def get_integration_json(request: Request):
             },
             "settings": [
                 {"label": "site-1", "type": "text", "required": True, "default": ""},
+                {"label": "frontend-site","type":"text", "required":False,"default": ""},
                 {
                     "label": "interval",
                     "type": "text",
