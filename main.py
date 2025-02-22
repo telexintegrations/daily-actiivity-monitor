@@ -170,8 +170,56 @@ async def health_check():
 @app.get("/integration.json")
 @limiter.limit("60/minute")
 def get_integration_json(request: Request):
-    # ... (rest of the integration.json code remains the same)
-    pass
+    base_url = str(request.base_url).rstrip("/")
+    
+    integration_data = {
+        "data": {
+            "author": "Blackfox",
+            "date": {
+                "created_at": "2025-02-13",
+                "updated_at": "2025-02-13"
+            },
+            "descriptions": {
+                "app_description": "A bot that monitors the number of daily active users (DAU) on a platform.",
+                "app_logo": "https://img.icons8.com/?size=100&id=37410&format=png&color=000000",
+                "app_name": "Telex DAU Monitor",
+                "app_url": "https://project-it.onrender.com",
+                "background_color": "#ffffff"
+            },
+            "integration_category": "Monitoring & Logging",
+            "integration_type": "interval",
+            "is_active": True,
+            "key_features": [
+                "Receive messages from Telex channels.",
+                "Fetch daily active users (DAU) from website analytics.",
+                "Format messages based on predefined templates or logic.",
+                "Send DAU reports back to the Telex channel.",
+                "Log DAU tracking activity for auditing purposes."
+            ],
+            "permissions": {
+                "events": [
+                    "Receive messages from Telex channels.",
+                    "Fetch DAU metrics from website analytics API.",
+                    "Format DAU reports.",
+                    "Send DAU updates back to the channel.",
+                    "Log DAU tracking activity for auditing purposes."
+                ]
+            },
+            "settings": [
+                {"label": "site-1", "type": "text", "required": True, "default": ""},
+                {"label": "frontend-site","type":"text", "required":False,"default": ""},
+                {
+                    "label": "interval",
+                    "type": "text",
+                    "required": True,
+                    "default": "@hourly"
+                }
+            ],
+            "target_url": "https://portfolio-wahz.onrender.com",
+            "tick_url": f"{base_url}/tick"
+        }
+    }
+    return integration_data
 
 @app.post("/tick", status_code=202)
 @limiter.limit("30/minute")
