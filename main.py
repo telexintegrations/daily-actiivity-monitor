@@ -176,6 +176,7 @@ def get_integration_json(request: Request):
 @app.post("/tick", status_code=202)
 @limiter.limit("30/minute")
 async def monitor(
+    request: Request,  # Add this parameter
     payload: MonitorPayload,
     background_tasks: BackgroundTasks,
     settings: Settings = Depends(get_settings)
