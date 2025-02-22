@@ -3,3 +3,4 @@ uvicorn[standard]
 pydantic
 typing
 httpx
+slowapi
