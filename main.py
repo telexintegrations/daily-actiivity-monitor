@@ -11,8 +11,19 @@ from functools import lru_cache
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
+import sys
 
 # Configuration class
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler('dau_monitor.log')
+    ]
+)
+logger = logging.getLogger(__name__)
 class Settings:
     ALLOWED_ORIGINS: List[str] = ["https://your-domain.com"]
     REQUEST_TIMEOUT: int = 10
@@ -25,6 +36,7 @@ def get_settings():
     return Settings()
 
 # Enhanced models with validation
+logger.info("Logger is working!")  # Add this early in the script
 class Setting(BaseModel):
     label: str
     type: str
@@ -115,54 +127,76 @@ async def fetch_dau_data(site: str, settings: Settings) -> DAUResponse:
         await asyncio.sleep(2 ** attempt)  # Exponential backoff
 
 async def monitor_dau_task(payload: MonitorPayload, settings: Settings):
-    """Enhanced monitoring task with better error handling and reporting."""
+    """Enhanced monitoring task with detailed debugging."""
     try:
-        sites = [s.default for s in payload.settings if s.label.startswith("site")]
-        frontend_sites = {
-            s.label.split('-')[1]: s.default 
-            for s in payload.settings 
-            if s.label.startswith("frontend")
-        }
+        logger.debug(f"Starting monitor_dau_task with payload: {payload.json()}")
+        
+        # Extract and log sites
+        sites = [s.default for s in payload.settings if s.label.startswith("site-")]
+        logger.debug(f"Extracted sites: {sites}")
+        
+        # Extract and log frontend URL
+        frontend_url = next(
+            (s.default for s in payload.settings if s.label == "frontend-site"),
+            "N/A"
+        )
+        logger.debug(f"Frontend URL: {frontend_url}")
 
+        # Fetch DAU data
+        logger.debug("Starting DAU data fetch for all sites")
         results = await asyncio.gather(
             *(fetch_dau_data(site, settings) for site in sites)
         )
+        logger.debug(f"DAU fetch results: {results}")
 
-        # Format message with better error handling
+        # Format messages
         message_lines = []
         for i, result in enumerate(results):
-            site_num = str(i + 1)
-            frontend = frontend_sites.get(site_num, "N/A")
+            logger.debug(f"Processing result {i}: {result}")
             
             if result.dau is not None:
-                message_lines.append(
-                    f"{result.site}: {result.dau} active users "
-                    f"(Frontend: {frontend})"
+                message = (
+                    f"Site: {result.site}\n"
+                    f"Daily Active Users: {result.dau}\n"
+                    f"Frontend URL: {frontend_url}\n"
+                    f"Timestamp: {result.timestamp}"
                 )
             else:
-                message_lines.append(
-                    f"{result.site}: Error - {result.error}"
+                message = (
+                    f"Site: {result.site}\n"
+                    f"Error: {result.error}\n"
+                    f"Frontend URL: {frontend_url}\n"
+                    f"Timestamp: {result.timestamp}"
                 )
+            
+            message_lines.append(message)
+            logger.debug(f"Added message line: {message}")
 
         status = "success" if all(r.dau is not None for r in results) else "error"
+        logger.info(f"Final status: {status}")
+        
+        # Prepare and send final payload
+        final_payload = {
+            "message": "\n\n".join(message_lines),
+            "username": "DAU Monitor",
+            "event_name": "Daily Active Users Report",
+            "status": status,
+            "timestamp": datetime.now().isoformat()
+        }
+        logger.debug(f"Sending final payload: {json.dumps(final_payload, indent=2)}")
         
         async with httpx.AsyncClient() as client:
-            await client.post(
+            logger.debug(f"Posting to return URL: {payload.return_url}")
+            response = await client.post(
                 str(payload.return_url),
-                json={
-                    "message": "\n".join(message_lines),
-                    "username": "DAU Monitor",
-                    "event_name": "Daily Active Users Report",
-                    "status": status,
-                    "timestamp": datetime.now().isoformat()
-                }
+                json=final_payload
             )
+            logger.debug(f"Return URL response: {response.status_code} - {response.text}")
 
     except Exception as e:
-        logging.exception("Failed to complete monitoring task")
-        # Here you might want to implement a dead letter queue
-        # or alert system for failed tasks
-
+        logger.exception("Critical error in monitor_dau_task")
+        raise
+     
 @app.get("/health")
 async def health_check():
     return {"status": "healthy", "timestamp": datetime.now().isoformat()}
@@ -207,13 +241,8 @@ def get_integration_json(request: Request):
             },
             "settings": [
                 {"label": "site-1", "type": "text", "required": True, "default": ""},
-                {"label": "frontend-site","type":"text", "required":False,"default": ""},
-                {
-                    "label": "interval",
-                    "type": "text",
-                    "required": True,
-                    "default": "@hourly"
-                }
+                {"label": "frontend-site", "type": "text", "required": True, "default": "https://salam-portfolio-three.vercel.app/"},
+                {"label": "interval", "type": "text", "required": True, "default": "@hourly"}
             ],
             "target_url": "https://portfolio-wahz.onrender.com",
             "tick_url": f"{base_url}/tick"
