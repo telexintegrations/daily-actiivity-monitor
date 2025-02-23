@@ -156,9 +156,9 @@ async def monitor_dau_task(payload: MonitorPayload, settings: Settings):
             
             if result.dau is not None:
                 message = (
-                    f"Site: {result.site}\n"
+                    f"Site Monitored: {frontend_url}\n"
+                    f"Backend URL: {result.site}\n"
                     f"Daily Active Users: {result.dau}\n"
-                    f"Frontend URL: {frontend_url}\n"
                     f"Timestamp: {result.timestamp}"
                 )
             else:

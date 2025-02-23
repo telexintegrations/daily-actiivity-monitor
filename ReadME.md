@@ -1,7 +1,8 @@
 # Daily Active Users Bot for Telex
 
 ## Overview
-This project is a **Telex Interval Integration** that sends daily active user reports every 15 minutes to a Telex channel. The bot monitors the portfolio website [salam-portfolio-three.vercel.app](https://salam-portfolio-three.vercel.app/) and reports the number of unique visitors within the last 24 hours.
+This project is a **Telex Interval Integration** that sends daily active user reports every 3 minutes to a Telex channel. The bot monitors the portfolio website [salam-portfolio-three.vercel.app](https://salam-portfolio-three.vercel.app/) and reports the number of unique visitors within the last 24 hours.
+The [backend](https://portfolio-wahz.onrender.com) contains some code implementation to track the users behaviour.
 
 ## Features
 - Tracks unique visitors to the portfolio website.

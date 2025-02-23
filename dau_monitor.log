@@ -55,3 +55,9 @@ Timestamp: 2025-02-23 09:31:18.722712
 2025-02-23 09:31:21,124 - main - DEBUG - Return URL response: 202 - {"status":"error","status_code":400,"message":"timestamp is not an allowed value"}
 2025-02-23 09:32:58,775 - main - INFO - Logger is working!
 2025-02-23 09:33:02,969 - main - INFO - Logger is working!
+2025-02-23 11:43:23,497 - main - INFO - Logger is working!
+2025-02-23 11:43:29,740 - main - INFO - Logger is working!
+2025-02-23 11:43:33,855 - main - INFO - Logger is working!
+2025-02-23 11:43:41,287 - main - INFO - Logger is working!
+2025-02-23 11:43:45,521 - main - INFO - Logger is working!
+2025-02-23 11:43:48,647 - main - INFO - Logger is working!
