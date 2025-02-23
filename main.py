@@ -217,7 +217,7 @@ def get_integration_json(request: Request):
                 "app_description": "A bot that monitors the number of daily active users (DAU) on a platform.",
                 "app_logo": "https://img.icons8.com/?size=100&id=37410&format=png&color=000000",
                 "app_name": "Telex DAU Monitor",
-                "app_url": "https://project-it.onrender.com",
+                "app_url": "https://daily-actiivity-monitor.onrender.com",
                 "background_color": "#ffffff"
             },
             "integration_category": "Monitoring & Logging",
